@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 # A secret key is needed to use Flask sessioning features
 
-app.secret_key = 'this-should-be-something-unguessable'
+app.secret_key = 'fbshtfdstdyhdjydhdyjyj'
 
 # Normally, if you refer to an undefined variable in a Jinja template,
 # Jinja silently ignores this. This makes debugging difficult, so we'll
@@ -50,7 +50,7 @@ def show_melon(melon_id):
     """
 
     melon = melons.get_by_id(melon_id)
-    print(melon)
+    # print(melon)
     return render_template("melon_details.html",
                            display_melon=melon)
 
@@ -99,18 +99,43 @@ def add_to_cart(melon_id):
     # - flash a success message
     # - redirect the user to the cart page
 
-    if "cart" not in session:
-        melons_to_buy = []
+    print("\n\n\nStart of print", session)
+    if "cart" in session:
+        if melon_id in session["cart"]:
+            session["cart"][melon_id] += 1
+        else:
+            session["cart"][melon_id] = 1
     else:
-        melons_to_buy = session["cart"]
+        session["cart"] = {}
 
-    melons_to_buy.append(melon_id)
 
-    print(melons_to_buy)
 
-    session["cart"] = melons_to_buy
+    # print("\n\n\nStart of print", session)
+    # if "cart" not in session:
+    #     session["cart"] = {}
+    #     print("If cart not in session, print empty cart", session["cart"])
 
+    # session["cart"][melon_id] = 1
+
+
+
+
+    
+    # if melon_id not in session["cart"]:
+    #     session["cart"][melon_id] = 1
+    #     print("If melonid is not in session cart", session["cart"][melon_id])
+    # else:
+    #     session["cart"][melon_id] += 1
+    #     print("Else print updated value", session["cart"][melon_id]) 
+
+    # print(session["cart"])
+
+    # print(session["cart"][melon_id])
+    
+    
     print(session)
+    print("End of Print\n\n\n")
+    
 
 
 
