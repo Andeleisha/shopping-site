@@ -99,12 +99,23 @@ def add_to_cart(melon_id):
     # - flash a success message
     # - redirect the user to the cart page
 
-    
-    if "cart" in session:
-        print("cart")
+    if "cart" not in session:
+        melons_to_buy = []
+    else:
+        melons_to_buy = session["cart"]
 
-    # session["cart"] = session["cart"].append(melon_id)
-    # print(session["cart"])
+    melons_to_buy.append(melon_id)
+
+    print(melons_to_buy)
+
+    session["cart"] = melons_to_buy
+
+    print(session)
+
+
+
+
+
 
     
 
